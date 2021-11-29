@@ -1,0 +1,5 @@
+﻿to-do-api/appsettings.json
+
+to-do-api/obj/
+to-do-api/bin/
+.vs/

@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+
+using to_do_api.DAOs;
 
 namespace to_do_api
 {
@@ -25,6 +28,11 @@ namespace to_do_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<ToDoContext>(options =>
+                options.UseMySql(
+                    Configuration["ConnectionStrings:DefaultConnection"],
+                    new MySqlServerVersion(new Version(8, 0, 23))
+                ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

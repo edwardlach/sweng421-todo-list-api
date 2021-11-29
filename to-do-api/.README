@@ -1,0 +1,19 @@
+﻿Requires the Installation of the following NuGet Packages:
+    * Microsoft.EntityFrameworkCore v6.0.0
+    * Microsoft.EntityFrameworkCore.Tools v6.0.0
+    * Pomelo.EntityFrameworkCore.MySql v6.0.0
+
+Must add a file appsettings.json with the following structure:
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "Microsoft.Hosting.Lifetime": "Information"
+        }
+      },
+      "AllowedHosts": "*",
+      "ConnectionStrings": {
+        "DefaultConnection": "server={server};database={database};user={user};password={password}"
+      }
+    }
