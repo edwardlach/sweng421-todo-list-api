@@ -173,6 +173,9 @@
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="DTOs\ChangeDTO.cs" />
     <Compile Include="DTOs\abstract\AbstractCollectionDTO.cs" />
+    <Compile Include="Services\IChangePoller.cs" />
+    <Compile Include="Services\impl\ChangePoller.cs" />
+    <Compile Include="State\ChangeState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
