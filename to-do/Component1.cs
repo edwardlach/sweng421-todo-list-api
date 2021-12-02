@@ -17,12 +17,19 @@ namespace to_do
                 (user) =>
                 {
                     this.user = user;
-                    Console.Write(user.FirstName + " " + user.LastName);
+                    Console.WriteLine(user.FirstName + " " + user.LastName);
                     return user;
                 })
                 .Subscribe(this.store.UserState, this.store.UserState.SelectActive);
 
-            this.store.UserState.SetActive(this.store.UserState.SelectById(1));
+            UserDTO.UserResponse newUser = new UserDTO.UserResponse();
+            newUser.Id = 1;
+            newUser.FirstName = "Ed";
+            newUser.LastName = "Lach";
+            newUser.Email = "edwarrdlach@gmail.com";
+            this.store.UserState.SetActive(newUser);
+            newUser.FirstName = "Edward";
+            this.store.UserState.SetActive(newUser);
         }
     }
 }
