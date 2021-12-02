@@ -6,9 +6,11 @@ namespace to_do.State
     public class Store
     {
         private UserState _userState;
+        private ChangeState _changeState;
 
         public Store() {
             this._userState = new UserState(new List<UserDTO.UserResponse>());
+            this._changeState = new ChangeState(new List<ChangeDTO.ChangeResponse>());
         }
 
         public Store(List<UserDTO.UserResponse> initialUsers) 
@@ -17,5 +19,6 @@ namespace to_do.State
         }
 
         public UserState UserState { get => _userState; }
+        public ChangeState ChangeState { get => _changeState; }
     }
 }

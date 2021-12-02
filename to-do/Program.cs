@@ -40,6 +40,7 @@ namespace to_do
                 .AddSingleton<Store>()
                 .AddScoped<Component1>()
                 .AddScoped<Form1>()
+                .AddScoped<IChangePoller, ChangePoller>()
                 .AddScoped<IUserService, UserService>()
                 .AddHttpClient<IUserService, UserService>();
         }
