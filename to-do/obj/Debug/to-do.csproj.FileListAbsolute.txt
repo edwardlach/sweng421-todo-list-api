@@ -1,0 +1,10 @@
+C:\Users\sandy\OneDrive\Documents\1. PennState\SWENG421\Final Project\repo\to-do\bin\Debug\to-do.exe.config
+C:\Users\sandy\OneDrive\Documents\1. PennState\SWENG421\Final Project\repo\to-do\bin\Debug\to-do.exe
+C:\Users\sandy\OneDrive\Documents\1. PennState\SWENG421\Final Project\repo\to-do\bin\Debug\to-do.pdb
+C:\Users\sandy\OneDrive\Documents\1. PennState\SWENG421\Final Project\repo\to-do\obj\Debug\to-do.csproj.AssemblyReference.cache
+C:\Users\sandy\OneDrive\Documents\1. PennState\SWENG421\Final Project\repo\to-do\obj\Debug\to_do.Form1.resources
+C:\Users\sandy\OneDrive\Documents\1. PennState\SWENG421\Final Project\repo\to-do\obj\Debug\to_do.Properties.Resources.resources
+C:\Users\sandy\OneDrive\Documents\1. PennState\SWENG421\Final Project\repo\to-do\obj\Debug\to-do.csproj.GenerateResource.cache
+C:\Users\sandy\OneDrive\Documents\1. PennState\SWENG421\Final Project\repo\to-do\obj\Debug\to-do.csproj.CoreCompileInputs.cache
+C:\Users\sandy\OneDrive\Documents\1. PennState\SWENG421\Final Project\repo\to-do\obj\Debug\to-do.exe
+C:\Users\sandy\OneDrive\Documents\1. PennState\SWENG421\Final Project\repo\to-do\obj\Debug\to-do.pdb
