@@ -22,6 +22,8 @@ namespace to_do_api.DTOs
 
             public int ListId { get; set; }
 
+            public int UserId { get; set; }
+
             public override ToDoTask ToModel()
             {
                 ToDoTask task = new ToDoTask();
@@ -45,9 +47,9 @@ namespace to_do_api.DTOs
                 this.Priority = entity.Priority;
                 this.Status = entity.Status;
                 this.DueDate = entity.DueDate;
-                if (entity.ToDoList != null)
+                if (entity.List != null)
                 {
-                    this.List = new ToDoListDTO.ToDoListSummaryResponse(entity.ToDoList);
+                    this.List = new ToDoListDTO.ToDoListSummaryResponse(entity.List);
                 }
             }
 
@@ -111,6 +113,8 @@ namespace to_do_api.DTOs
             public string Status { get; set; }
 
             public DateTime DueDate { get; set; }
+
+            public int UserId { get; set; }
 
             public override ToDoTask ToModel()
             {

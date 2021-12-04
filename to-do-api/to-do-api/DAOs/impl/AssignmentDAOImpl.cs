@@ -20,10 +20,7 @@ namespace to_do_api.DAOs.impl
 
         protected override void ApplyUpdates(Assignment toUpdate, Assignment updates)
         {
-            if (toUpdate.Deleted != updates.Deleted)
-            {
-                toUpdate.Deleted = updates.Deleted;
-            }
+            toUpdate.Deleted = updates.Deleted;
         }
     }
 }

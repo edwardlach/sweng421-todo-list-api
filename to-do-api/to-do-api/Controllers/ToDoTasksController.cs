@@ -17,18 +17,24 @@ namespace to_do_api.Controllers
 
         // POST tasks
         [HttpPost]
-        public ToDoTaskDTO.ToDoTaskResponse Post(ToDoTaskDTO.ToDoTaskCreateRequest toCreate)
+        public ToDoTaskDTO.ToDoTaskResponse Create(ToDoTaskDTO.ToDoTaskCreateRequest toCreate)
         {
             return new ToDoTaskDTO.ToDoTaskResponse(
-                this.taskService.Create(toCreate.ToModel()));
+                this.taskService.Create(toCreate.ToModel(), toCreate.UserId));
         }
 
         // GET tasks/{id}
         [HttpGet("{id}")]
-        public ToDoTaskDTO.ToDoTaskResponse GET(int id)
+        public ToDoTaskDTO.ToDoTaskResponse Read(int id)
         {
             return new ToDoTaskDTO.ToDoTaskResponse(this.taskService.Read(id));
         }
 
+        // PUT tasks/{id}
+        public ToDoTaskDTO.ToDoTaskResponse Update(int id, ToDoTaskDTO.ToDoTaskUpdateRequest updates)
+        {
+            return new ToDoTaskDTO.ToDoTaskResponse(
+                this.taskService.Update(id, updates.ToModel(), updates.UserId));
+        }
     }
 }

@@ -10,14 +10,14 @@ namespace to_do_api.DTOs
         {
             public ChangeResponse(Change entity) : base(entity)
             {
-                this.TaskId = entity.TaskId;
-                this.Field = entity.Field;
+                this.Task = new ToDoTaskDTO.ToDoTaskSummaryResponse(entity.Task);
                 this.Value = entity.Value;
+                this.ChangingUser = new UserDTO.UserResponse(entity.ChangingUser);
             }
 
-            public int TaskId { get; set; }
+            public ToDoTaskDTO.ToDoTaskSummaryResponse Task { get; set; }
 
-            public string Field { get; set; }
+            public UserDTO.UserResponse ChangingUser { get; set; }
 
             public string Value { get; set; }
         }
