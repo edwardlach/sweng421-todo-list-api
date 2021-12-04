@@ -2,20 +2,23 @@
 using System.ComponentModel.DataAnnotations.Schema;
 namespace to_do_api.Models
 {
-    [Table("memberships")]
-    public class Membership : TimestampedEntity
+    [Table("subscriptions")]
+    public class Subscription : TimestampedEntity
     {
-        public Membership() {}
+        public Subscription() {}
 
-        public Membership(int userId, int listId)
+        public Subscription(int userId, int listId)
         {
             this.SetDateToNow();
             this.Deleted = false;
+            this.LastAccessed = DateTime.Now;
             this.UserId = userId;
             this.ListId = listId;
         }
 
         public Boolean Deleted { get; set; }
+
+        public DateTime LastAccessed { get; set; }
 
         public int ListId { get; set; }
 
