@@ -10,6 +10,13 @@ namespace to_do_api.DAOs.impl
     {
         public SubscriptionDAOImpl(ToDoContext dbContext) : base(dbContext) {}
 
+        public List<Subscription> ReadForUser(int userId)
+        {
+            return this.dbContext.Subscriptions
+                .Where<Subscription>(s => s.UserId == userId)
+                .ToList();
+        }
+
         protected override void ApplyUpdates(Subscription toUpdate, Subscription updates)
         {
             toUpdate.LastAccessed = updates.LastAccessed;

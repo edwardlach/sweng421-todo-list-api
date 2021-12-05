@@ -25,8 +25,8 @@ namespace to_do.Services.@abstract
 
         public async Task<RESPONSE> Read(int id)
         {
-            var responseString = await http.GetStringAsync(host + resource + "/" + id);
-            return JsonConvert.DeserializeObject<RESPONSE>(responseString);
+            var responseString = await http.GetAsync(host + resource + "/" + id.ToString());
+            return await GetResponseFromMessage<RESPONSE>(responseString);
         }
 
         protected static async Task<RESP_TYPE> GetResponseFromMessage<RESP_TYPE>(HttpResponseMessage message)

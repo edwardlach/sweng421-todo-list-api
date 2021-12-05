@@ -17,7 +17,7 @@ namespace to_do.Services.@abstract
         public async Task<RESPONSE> Update(UPDATE_REQUEST updates, int id)
         {
             HttpResponseMessage responseMessage = await http.PutAsync(
-                host + resource + "/" + id,
+                host + resource + "/" + id.ToString(),
                 RequestToJsonStringContent<UPDATE_REQUEST>(updates));
             return await GetResponseFromMessage<RESPONSE>(responseMessage);
         }

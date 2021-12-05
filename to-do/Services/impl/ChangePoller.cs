@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using to_do.State;
+using to_do.State.@abstract;
 using System.Threading.Tasks;
 using System.Threading;
 using to_do.DTOs;
+using Microsoft.Extensions.Hosting;
+
 namespace to_do.Services.impl
 {
-    public class ChangePoller : IChangePoller
+    public class ChangePoller : IHostedService, IChangePoller
     {
         private IUserService userService;
         private ISubscriptionService subscriptionService;
@@ -24,24 +27,76 @@ namespace to_do.Services.impl
 
         public void PollForChanges()
         {
-            while(true)
+            Task.Run(() =>
             {
-                var poll = Task<List<ChangeDTO.ChangeResponse>>.Run(() =>
-                {
-                    // TODO Make API request to get new changes for user instead
-                    // of below dummy code.
-                    ChangeDTO.ChangeResponse response = new ChangeDTO.ChangeResponse();
-                    List<ChangeDTO.ChangeResponse> changes = new List<ChangeDTO.ChangeResponse>();
-                    changes.Add(response);
-                    return changes;
-                });
+                List<SubscriptionDTO.SubscriptionResponse> currrentSubscriptions
+                        = new List<SubscriptionDTO.SubscriptionResponse>();
 
-                if (poll.Result.Count > 0)
+                new Observer<
+                        SubscriptionDTO.SubscriptionResponse,
+                        List<SubscriptionDTO.SubscriptionResponse>>(
+                    (subscriptions) =>
+                    {
+                        currrentSubscriptions = subscriptions;
+                        return subscriptions;
+                    })
+                    .Subscribe(this.store.SubscriptionState, this.store.SubscriptionState.SelectAll);
+
+                while (true)
                 {
-                    poll.Result.ForEach(change => this.store.ChangeState.AddTo(change));
+
+                    List<ChangeDTO.ChangeResponse> changes = new List<ChangeDTO.ChangeResponse>();
+                    currrentSubscriptions.ForEach(s =>
+                    {
+                        changes.AddRange(this.subscriptionService
+                            .ReadSubscribedChanges(s.Id)
+                            .Result.Collection);
+                    });
+                    if (changes.Count > 0)
+                    {
+                        changes.ForEach(change => this.store.ChangeState.AddTo(change));
+                    }
+                    Thread.Sleep(10000);
+                }
+            });               
+        }
+
+        public Task StartAsync(CancellationToken cancellationToken)
+        {
+            List<SubscriptionDTO.SubscriptionResponse> currrentSubscriptions
+                        = new List<SubscriptionDTO.SubscriptionResponse>();
+
+            new Observer<
+                    SubscriptionDTO.SubscriptionResponse,
+                    List<SubscriptionDTO.SubscriptionResponse>>(
+                (subscriptions) =>
+                {
+                    currrentSubscriptions = subscriptions;
+                    return subscriptions;
+                })
+                .Subscribe(this.store.SubscriptionState, this.store.SubscriptionState.SelectAll);
+
+            while (true)
+            {
+
+                List<ChangeDTO.ChangeResponse> changes = new List<ChangeDTO.ChangeResponse>();
+                currrentSubscriptions.ForEach(s =>
+                {
+                    changes.AddRange(this.subscriptionService
+                        .ReadSubscribedChanges(s.Id)
+                        .Result.Collection);
+                });
+                if (changes.Count > 0)
+                {
+                    changes.ForEach(change => this.store.ChangeState.AddTo(change));
                 }
                 Thread.Sleep(10000);
             }
+        }
+
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

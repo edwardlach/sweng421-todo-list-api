@@ -6,6 +6,5 @@ namespace to_do.State
     public class ChangeState : AbstractState<ChangeDTO.ChangeResponse>
     {
         public ChangeState(List<ChangeDTO.ChangeResponse> initialState) : base(initialState) {}
-
     }
 }

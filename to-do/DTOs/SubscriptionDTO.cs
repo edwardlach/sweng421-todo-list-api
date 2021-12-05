@@ -29,6 +29,9 @@ namespace to_do.DTOs
             public int UserId { get; set; }
         }
 
+        public class SubscriptionCollectionResponse
+            : AbstractCollectionDTO.AbstractCollectionResponse<SubscriptionResponse> {}
+
         public class SubscriptionUpdateRequest : AbstractIdentifiableDTO.AbstractIdentifiableUpdateRequest
         {
             public Boolean Deleted { get; set; }

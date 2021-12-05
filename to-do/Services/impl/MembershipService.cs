@@ -10,8 +10,7 @@ namespace to_do.Services.impl
         MembershipDTO.MembershipUpdateRequest>,
         IMembershipService
     {
-        public MembershipService(
-            HttpClient http,
-            string host) : base(http, host, APIResource.MEMBERSHIPS) {}
+        public MembershipService(HttpClient http)
+            : base(http, APIResource.LOCALHOST, APIResource.MEMBERSHIPS) {}
     }
 }

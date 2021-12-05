@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using to_do.State;
+using System.Net.Http;
 using to_do.DTOs;
 using to_do.Services;
 using to_do.Services.impl;
@@ -26,6 +27,8 @@ namespace to_do
             ConfigureServices(services);
             using (ServiceProvider serviceProvider = services.BuildServiceProvider())
             {
+                //var changePoller = serviceProvider.GetRequiredService<ChangePoller>();
+                //changePoller.PollForChanges();
                 var comp1 = serviceProvider.GetRequiredService<Component1>();
                 //var form1 = serviceProvider.GetRequiredService<Form1>();
                 //Application.Run(form1);
@@ -38,11 +41,18 @@ namespace to_do
         {
             services
                 .AddSingleton<Store>()
+                .AddSingleton<HttpClient>()
+                //.AddSingleton<ChangePoller>()
                 .AddScoped<Component1>()
                 .AddScoped<Form1>()
-                .AddScoped<IChangePoller, ChangePoller>()
+                //.AddScoped<IChangePoller, ChangePoller>()
+                .AddScoped<IAssignmentService, AsssignmentService>()
+                .AddScoped<IMembershipService, MembershipService>()
+                .AddScoped<ISubscriptionService, SubscriptionService>()
+                .AddScoped<IToDoListService, ToDoListService>()
+                .AddScoped<IToDoTaskService,ToDoTaskService>()
                 .AddScoped<IUserService, UserService>()
-                .AddHttpClient<IUserService, UserService>();
+                .AddHostedService<ChangePoller>();
         }
             
     }

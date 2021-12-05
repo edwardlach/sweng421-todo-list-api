@@ -10,8 +10,7 @@ namespace to_do.Services.impl
         ToDoTaskDTO.ToDoTaskUpdateRequest>,
         IToDoTaskService
     {
-        public ToDoTaskService(
-            HttpClient http,
-            string host) : base(http, host, APIResource.TASKS) {}
+        public ToDoTaskService(HttpClient http)
+            : base(http, APIResource.LOCALHOST, APIResource.TASKS) {}
     }
 }
