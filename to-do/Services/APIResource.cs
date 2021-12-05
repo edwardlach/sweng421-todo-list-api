@@ -9,6 +9,7 @@ namespace to_do.Services
         public static string CHANGES = "changes";
         public static string LISTS = "lists";
         public static string MEMBERSHIPS = "memberships";
+        public static string SUBSCRIPTIONS = "subscriptions";
         public static string TASKS = "tasks";
         public static string USERS = "users";
     }

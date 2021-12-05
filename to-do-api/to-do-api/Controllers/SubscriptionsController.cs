@@ -36,7 +36,7 @@ namespace to_do_api.Controllers
         {
             return new ChangeDTO.ChangeCollectionResponse(
                 this.subscriptionService.ReadChangesForSubscription(id));
-        }
+        }      
 
         // PUT subscriptions/{id}
         [HttpPut("{id}")]

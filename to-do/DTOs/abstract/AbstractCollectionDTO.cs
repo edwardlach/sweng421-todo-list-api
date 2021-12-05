@@ -8,11 +8,6 @@ namespace to_do.DTOs.@abstract
             where RESPONSE : AbstractIdentifiableDTO.AbstractIdentifiableResponse
         {
             public List<RESPONSE> Collection { get; set; }
-
-            public AbstractCollectionResponse(List<RESPONSE> collection)
-            {
-                this.Collection = collection;
-            }
         }
     }
 }

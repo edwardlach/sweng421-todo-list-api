@@ -176,6 +176,26 @@
     <Compile Include="Services\IChangePoller.cs" />
     <Compile Include="Services\impl\ChangePoller.cs" />
     <Compile Include="State\ChangeState.cs" />
+    <Compile Include="Services\IAssignmentService.cs" />
+    <Compile Include="DTOs\AssignmentDTO.cs" />
+    <Compile Include="DTOs\ToDoTaskDTO.cs" />
+    <Compile Include="DTOs\ToDoListDTO.cs" />
+    <Compile Include="DTOs\MembershipDTO.cs" />
+    <Compile Include="DTOs\SubscriptionDTO.cs" />
+    <Compile Include="Services\IMembershipService.cs" />
+    <Compile Include="Services\ISubscriptionService.cs" />
+    <Compile Include="Services\IToDoListService.cs" />
+    <Compile Include="Services\IToDoTaskService.cs" />
+    <Compile Include="Services\impl\AsssignmentService.cs" />
+    <Compile Include="Services\impl\MembershipService.cs" />
+    <Compile Include="Services\impl\SubscriptionService.cs" />
+    <Compile Include="Services\impl\ToDoListService.cs" />
+    <Compile Include="Services\impl\ToDoTaskService.cs" />
+    <Compile Include="State\AssignmentState.cs" />
+    <Compile Include="State\MembershipState.cs" />
+    <Compile Include="State\SubscriptionState.cs" />
+    <Compile Include="State\ToDoTaskState.cs" />
+    <Compile Include="State\ToDoListState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -28,5 +28,11 @@ namespace to_do.Services.@abstract
             var responseString = await http.GetStringAsync(host + resource + "/" + id);
             return JsonConvert.DeserializeObject<RESPONSE>(responseString);
         }
+
+        protected static async Task<RESP_TYPE> GetResponseFromMessage<RESP_TYPE>(HttpResponseMessage message)
+        {
+            var responseContent = await message.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<RESP_TYPE>(responseContent);
+        }
     }
 }

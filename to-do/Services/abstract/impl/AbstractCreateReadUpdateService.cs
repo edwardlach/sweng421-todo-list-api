@@ -19,7 +19,7 @@ namespace to_do.Services.@abstract
             HttpResponseMessage responseMessage = await http.PutAsync(
                 host + resource + "/" + id,
                 RequestToJsonStringContent<UPDATE_REQUEST>(updates));
-            return await GetResponseFromMessage(responseMessage);
+            return await GetResponseFromMessage<RESPONSE>(responseMessage);
         }
     }
 }
