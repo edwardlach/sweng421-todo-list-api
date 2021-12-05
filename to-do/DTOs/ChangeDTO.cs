@@ -16,7 +16,6 @@ namespace to_do.DTOs
 
         public class ChangeCollectionResponse : AbstractCollectionDTO.AbstractCollectionResponse<ChangeResponse>
         {
-            public ChangeCollectionResponse(List<ChangeResponse> changes) : base(changes) {}
         }
     }
 }

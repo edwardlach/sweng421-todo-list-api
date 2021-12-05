@@ -20,19 +20,13 @@ namespace to_do.Services.@abstract
             HttpResponseMessage responseMessage = await http.PostAsync(
                 host + resource,
                 RequestToJsonStringContent<CREATE_REQUEST>(request));
-            return await GetResponseFromMessage(responseMessage);
+            return await GetResponseFromMessage<RESPONSE>(responseMessage);
         }
 
         protected StringContent RequestToJsonStringContent<T>(T request)
         {
             var json = JsonConvert.SerializeObject(request);
             return new StringContent(json, UnicodeEncoding.UTF8, "application/json");
-        }
-
-        protected async Task<RESPONSE> GetResponseFromMessage(HttpResponseMessage message)
-        {
-            var responseContent = await message.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<RESPONSE>(responseContent);
         }
     }
 }

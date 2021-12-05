@@ -9,14 +9,17 @@ namespace to_do.Services.impl
     public class ChangePoller : IChangePoller
     {
         private IUserService userService;
+        private ISubscriptionService subscriptionService;
         private Store store;
 
         public ChangePoller(
             Store store,
-            IUserService userService)
+            IUserService userService,
+            ISubscriptionService subscriptionService)
         {
             this.store = store;
             this.userService = userService;
+            this.subscriptionService = subscriptionService;
         }
 
         public void PollForChanges()
