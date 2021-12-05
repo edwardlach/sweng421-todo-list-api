@@ -11,9 +11,8 @@ namespace to_do.Services.impl
         SubscriptionDTO.SubscriptionUpdateRequest>,
         ISubscriptionService
     {
-        public SubscriptionService(
-            HttpClient http,
-            string host) : base(http, host, APIResource.SUBSCRIPTIONS) {}
+        public SubscriptionService(HttpClient http)
+            : base(http, APIResource.LOCALHOST, APIResource.SUBSCRIPTIONS) {}
 
         public async Task<ChangeDTO.ChangeCollectionResponse> ReadSubscribedChanges(int subscriptionId)
         {

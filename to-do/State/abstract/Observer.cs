@@ -2,22 +2,22 @@
 using to_do.DTOs.@abstract;
 namespace to_do.State.@abstract
 {
-    public class Observer <RESOURCE> : IObserver<RESOURCE>
+    public class Observer <RESOURCE, RESPONSE> : IObserver<RESOURCE>
         where RESOURCE : AbstractIdentifiableDTO.AbstractIdentifiableResponse
     {
-        private Func<RESOURCE, RESOURCE> update;
-        private Func<int, RESOURCE> intSelector;
-        private Func<RESOURCE> voidSelector;
+        private Func<RESPONSE, RESPONSE> update;
+        private Func<int, RESPONSE> intSelector;
+        private Func<RESPONSE> voidSelector;
         private int arg;
         
-        public Observer(Func<RESOURCE, RESOURCE> update)
+        public Observer(Func<RESPONSE, RESPONSE> update)
         {
             this.update = update;
         }
 
         public void Subscribe(
             AbstractState<RESOURCE> state,
-            Func<int, RESOURCE> selector,
+            Func<int, RESPONSE> selector,
             int arg)
         {
             this.intSelector = selector;
@@ -27,7 +27,7 @@ namespace to_do.State.@abstract
 
         public void Subscribe(
             AbstractState<RESOURCE> state,
-            Func<RESOURCE> selector)
+            Func<RESPONSE> selector)
         {
             this.voidSelector = selector;
             state.Subscribe(this);

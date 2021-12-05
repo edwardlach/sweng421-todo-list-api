@@ -16,15 +16,18 @@ namespace to_do_api.Controllers
         private readonly ILogger<UsersController> _logger;
         private readonly IUserService userService;
         private readonly IAssignmentService assignmentService;
+        private readonly ISubscriptionService subscriptionService;
 
         public UsersController(
             ILogger<UsersController> logger,
             IUserService userService,
-            IAssignmentService assignmentService)
+            IAssignmentService assignmentService,
+            ISubscriptionService subscriptionService)
         {
             _logger = logger;
             this.userService = userService;
             this.assignmentService = assignmentService;
+            this.subscriptionService = subscriptionService;
         }
 
         // POST users
@@ -41,12 +44,20 @@ namespace to_do_api.Controllers
             return new UserDTO.UserResponse(this.userService.Read(id));
         }
 
-        // GETE users/{id}/assignments
+        // GET users/{id}/assignments
         [HttpGet("{id}/assignments")]
         public AssignmentDTO.AssignmentCollectionResponse GetUserAssignments(int id)
         {
             return new AssignmentDTO.AssignmentCollectionResponse(
                 this.assignmentService.ReadByUser(id));
+        }
+
+        // GET users/{id}/subscriptions
+        [HttpGet("{id}/subscriptions")]
+        public SubscriptionDTO.SubscriptionCollectionResponse GetUserSubscriptions(int id)
+        {
+            return new SubscriptionDTO.SubscriptionCollectionResponse(
+                this.subscriptionService.ReadForUser(id));
         }
 
         // PUT users/{id}

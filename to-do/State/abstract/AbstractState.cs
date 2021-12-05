@@ -56,6 +56,11 @@ namespace to_do.State
             return this.active;
         }
 
+        public List<RESOURCE> SelectAll()
+        {
+            return this.resources;
+        }
+
         private void notify()
         {
             this.observers.ForEach(o => o.Update());

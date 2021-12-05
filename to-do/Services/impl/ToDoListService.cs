@@ -10,8 +10,7 @@ namespace to_do.Services.impl
         ToDoListDTO.ToDoListUpdateRequest>,
         IToDoListService
     {
-        public ToDoListService(
-            HttpClient http,
-            string host) : base(http, host, APIResource.LISTS) {}
+        public ToDoListService(HttpClient http)
+            : base(http, APIResource.LOCALHOST, APIResource.LISTS) {}
     }
 }

@@ -7,5 +7,6 @@ namespace to_do_api.Services
     public interface ISubscriptionService : ICreateReadUpdateService<Subscription>
     {
         List<Change> ReadChangesForSubscription(int id);
+        List<Subscription> ReadForUser(int userId);
     }
 }

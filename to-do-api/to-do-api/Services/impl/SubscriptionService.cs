@@ -27,5 +27,10 @@ namespace to_do_api.Services.impl
             this.Update(subscription.Id, subscription);
             return changes;
         }
+
+        public List<Subscription> ReadForUser(int userId)
+        {
+            return this.dao.ReadForUser(userId);
+        }
     }
 }

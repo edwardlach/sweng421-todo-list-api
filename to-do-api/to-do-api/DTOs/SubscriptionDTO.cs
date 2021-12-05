@@ -57,6 +57,17 @@ namespace to_do_api.DTOs
             public int UserId { get; set; }
         }
 
+        public class SubscriptionCollectionResponse : AbstractCollectionDTO.AbstractCollectionResponse<
+            Subscription, SubscriptionDTO.SubscriptionResponse>
+        {
+            public SubscriptionCollectionResponse(List<Subscription> subscriptions) : base(subscriptions) {}
+
+            public override SubscriptionResponse ToResponse(Subscription entity)
+            {
+                return new SubscriptionResponse(entity);
+            }
+        }
+
         public class SubscriptionUpdateRequest : AbstractTimestampedDTO.AbstractTimestampedUpdateRequest<Subscription>
         {
             public Boolean Deleted { get; set; }

@@ -2,6 +2,8 @@
 using System.Net.Http;
 using to_do.Services.@abstract;
 using to_do.DTOs;
+using System.Threading.Tasks;
+
 namespace to_do.Services.impl
 {
     public class UserService : AbstractCreateReadUpdateService<
@@ -10,8 +12,14 @@ namespace to_do.Services.impl
         UserDTO.UserUpdateRequest>,
         IUserService
     {
-        public UserService(
-            HttpClient http,
-            string host) : base(http, host, APIResource.USERS) {}
+        public UserService(HttpClient http)
+            : base(http, APIResource.LOCALHOST, APIResource.USERS) {}
+
+        public async Task<SubscriptionDTO.SubscriptionCollectionResponse> GetUserSubscriptions(int userId)
+        {
+            HttpResponseMessage responseMessage = await http.GetAsync(
+                host + resource + "/" + userId.ToString() + "/subscriptions");
+            return await GetResponseFromMessage<SubscriptionDTO.SubscriptionCollectionResponse>(responseMessage);
+        }
     }
 }
