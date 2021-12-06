@@ -13,6 +13,8 @@ namespace to_do_api.DAOs
 
         public DbSet<Membership> Memberships { get; set; }
 
+        public DbSet<Subscription> Subscriptions { get; set; }
+
         public DbSet<ToDoList> ToDoLists { get; set; }
 
         public DbSet<ToDoTask> ToDoTasks { get; set; }

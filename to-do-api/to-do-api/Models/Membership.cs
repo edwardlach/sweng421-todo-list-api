@@ -5,6 +5,16 @@ namespace to_do_api.Models
     [Table("memberships")]
     public class Membership : TimestampedEntity
     {
+        public Membership() {}
+
+        public Membership(int userId, int listId)
+        {
+            this.SetDateToNow();
+            this.Deleted = false;
+            this.UserId = userId;
+            this.ListId = listId;
+        }
+
         public Boolean Deleted { get; set; }
 
         public int ListId { get; set; }

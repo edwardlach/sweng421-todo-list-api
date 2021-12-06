@@ -18,6 +18,6 @@ namespace to_do_api.Models
         public int ListId { get; set; }
 
         [ForeignKey("ListId")]
-        public ToDoList ToDoList { get; set; }
+        public ToDoList List { get; set; }
     }
 }

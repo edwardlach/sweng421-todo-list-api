@@ -8,7 +8,8 @@ using System.Threading;
 
 namespace to_do_api.Services.impl.@abstract
 {
-    public abstract class AbstractReadService <MODEL> : BackgroundService, IReadService <MODEL>  where MODEL : IdentifiableEntity
+    public abstract class AbstractReadService <MODEL>
+        : IReadService <MODEL>  where MODEL : IdentifiableEntity
     {
         protected IAbstractReadDAO<MODEL> dao;
         
@@ -20,11 +21,6 @@ namespace to_do_api.Services.impl.@abstract
         public MODEL Read(int id)
         {
             return this.dao.Read(id);
-        }
-
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            throw new NotImplementedException();
         }
     }
 }

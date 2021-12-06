@@ -7,24 +7,21 @@ namespace to_do_api.Services.impl
     public class MembershipService : AbstractCreateReadUpdateService<Membership>, IMembershipService
     {
         new protected IMembershipDAO dao;
-        private IToDoListService listService;
-        private IUserService userService;
+        private ISubscriptionService subscriptionService;
 
         public MembershipService(
             IMembershipDAO dao,
-            IToDoListService listService,
-            IUserService userService) : base(dao)
+            ISubscriptionService subscriptionService) : base(dao)
         {
             this.dao = dao;
-            this.listService = listService;
-            this.userService = userService;
+            this.subscriptionService = subscriptionService;
         }
 
         new public Membership Create(Membership toCreate)
         {
             Membership membership = base.Create(toCreate);
-            membership.List = this.listService.Read(membership.ListId);
-            membership.User = this.userService.Read(membership.UserId);
+            this.subscriptionService.Create(
+                new Subscription(membership.UserId, membership.ListId));
             return membership;
         }
     }
