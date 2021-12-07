@@ -20,7 +20,7 @@ namespace to_do.State
             this._membershipState = new MembershipState(new List<MembershipDTO.MembershipResponse>());
             this._subscriptionState = new SubscriptionState(new List<SubscriptionDTO.SubscriptionResponse>());
             this._listState = new ToDoListState(new List<ToDoListDTO.ToDoListResponse>());
-            this._taskState = new ToDoTaskState(new List<ToDoTaskDTO.ToDoTaskResponse>());
+            this._taskState = new ToDoTaskState(new List<ToDoTaskDTO.ToDoTaskSummaryResponse>());
             this._userState = new UserState(new List<UserDTO.UserResponse>());
         }
 

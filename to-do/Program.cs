@@ -21,18 +21,22 @@ namespace to_do
         [STAThread]
         static void Main()
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
             var services = new ServiceCollection();
             ConfigureServices(services);
             using (ServiceProvider serviceProvider = services.BuildServiceProvider())
             {
                 var changePoller = serviceProvider.GetRequiredService<ChangePoller>();
+                var initialize = serviceProvider.GetRequiredService<Initialize>();
+                initialize.Run();
                 Task changeListener = changePoller.PollForChanges();
                 var comp1 = serviceProvider.GetRequiredService<Component1>();
-                //var form1 = serviceProvider.GetRequiredService<Form1>();
-                //Application.Run(form1);
-                //Application.Run(new Form1());
+                var form1 = serviceProvider.GetRequiredService<Form1>();
+                Application.Run(form1);
+                
+
+
             }
 
         }
@@ -43,6 +47,7 @@ namespace to_do
                 .AddSingleton<Store>()
                 .AddSingleton<HttpClient>()
                 .AddSingleton<ChangePoller>()
+                .AddSingleton<Initialize>()
                 .AddScoped<Component1>()
                 .AddScoped<Form1>()
                 .AddScoped<IChangePoller, ChangePoller>()
@@ -53,6 +58,7 @@ namespace to_do
                 .AddScoped<IToDoTaskService, ToDoTaskService>()
                 .AddScoped<IUserService, UserService>();
         }
-            
+     
+
     }
 }

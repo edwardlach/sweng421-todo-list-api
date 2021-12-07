@@ -7,20 +7,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using to_do.DTOs;
+using to_do.State;
+using to_do.State.@abstract;
 namespace to_do
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        Store store;
+
+        public Form1(Store store)
         {
+            this.store = store;
+
             InitializeComponent();
             listView1.View = View.Details;
             listView1.Columns.Add("Task");
             listView1.Columns.Add("Priority");
             listView1.Columns.Add("Due Date");
+            listView1.Columns.Add("Status");
+            this.UpdateList(this.store.ToDoTaskState.SelectAll());
+            
+            //observer pattern
+            new Observer<ToDoTaskDTO.ToDoTaskSummaryResponse, List<ToDoTaskDTO.ToDoTaskSummaryResponse>>(
+                (tasks) =>
+                {
+                    this.UpdateList(tasks);
+
+                    return tasks;
+                })
+                .Subscribe(this.store.ToDoTaskState, this.store.ToDoTaskState.SelectAll);
+
         }
 
+        private void UpdateList(List<ToDoTaskDTO.ToDoTaskSummaryResponse> tasks)
+        {
+            //int rowNum = 0;
+            tasks.ForEach(task => {
+                string[] row = { task.Title, task.Priority, task.DueDate.ToString(), task.Status };
+                var listViewItem = new ListViewItem(row);
+                listView1.Items.Add(listViewItem);
+            });
+
+    
+
+        }
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -49,6 +80,9 @@ namespace to_do
         private void addItemButton_Click(object sender, EventArgs e)
         {
             {
+
+
+
                 string[] row = { "Get the Groceries", "High", "Today" };
                 var listViewItem = new ListViewItem(row);
                 listView1.Items.Add(listViewItem);
@@ -72,6 +106,26 @@ namespace to_do
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Note_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }

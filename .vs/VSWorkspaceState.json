@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\to-do",
     "\\to-do-api",
     "\\to-do-api\\to-do-api"
   ],
-  "SelectedNode": "\\to-do\\Form1.Designer.cs",
+  "SelectedNode": "\\to-do-api\\to-do-api\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

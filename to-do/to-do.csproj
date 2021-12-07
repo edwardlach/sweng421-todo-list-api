@@ -150,6 +150,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="State\Initialize.cs" />
     <Compile Include="State\Store.cs" />
     <Compile Include="State\UserState.cs" />
     <Compile Include="DTOs\abstract\AbstractIdentifiableDTO.cs" />
@@ -200,15 +201,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="State\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="DTOs\abstract\" />
-    <Folder Include="State\abstract\" />
-    <Folder Include="Services\" />
-    <Folder Include="Services\abstract\" />
-    <Folder Include="Services\abstract\impl\" />
-    <Folder Include="Services\impl\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
