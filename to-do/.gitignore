@@ -1,4 +1,6 @@
 ﻿**/packages/
 **/.vs/
+/.vs
+**/vs/
 **/obj/
 **/bin/Debug

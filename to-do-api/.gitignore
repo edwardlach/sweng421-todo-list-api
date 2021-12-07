@@ -3,3 +3,6 @@
 to-do-api/obj/
 to-do-api/bin/
 .vs/
+**/.vs/
+/.vs
+**/vs/
