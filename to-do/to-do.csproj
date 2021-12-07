@@ -197,6 +197,7 @@
     <Compile Include="State\SubscriptionState.cs" />
     <Compile Include="State\ToDoTaskState.cs" />
     <Compile Include="State\ToDoListState.cs" />
+    <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
