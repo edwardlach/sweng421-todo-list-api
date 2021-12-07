@@ -198,10 +198,27 @@
     <Compile Include="State\ToDoTaskState.cs" />
     <Compile Include="State\ToDoListState.cs" />
     <None Include=".gitignore" />
+    <Compile Include="State\Filter\Task\ITaskFilter.cs" />
+    <Compile Include="State\Filter\Task\TaskPastDueFilter.cs" />
+    <Compile Include="State\Filter\Task\TaskDueSoonFilter.cs" />
+    <Compile Include="State\Filter\Task\TaskPriorityFilter.cs" />
+    <Compile Include="State\Filter\Task\TaskStatusFilter.cs" />
+    <Compile Include="State\Filter\Task\TaskNoFilter.cs" />
+    <Compile Include="TaskComponent.cs" />
+    <Compile Include="Decorators\TaskDecorator.cs" />
+    <Compile Include="ITaskComponent.cs" />
+    <Compile Include="Decorators\TaskHighPriorityDecorator.cs" />
+    <Compile Include="Decorators\TaskPastDueDecorator.cs" />
+    <Compile Include="Decorators\TaskBlockedDecorator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="State\Filter\" />
+    <Folder Include="State\Filter\Task\" />
+    <Folder Include="Decorators\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
