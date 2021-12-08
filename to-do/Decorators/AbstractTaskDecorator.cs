@@ -1,18 +1,18 @@
 ﻿using System;
 namespace to_do.Decorators
 {
-    public class TaskDecorator : ITaskComponent
+    public abstract class AbstractTaskDecorator : ITaskComponent
     {
         protected TaskComponent wrappee;
 
-        public TaskDecorator(TaskComponent wrappee)
+        public AbstractTaskDecorator(TaskComponent wrappee)
         {
             this.wrappee = wrappee;
         }
 
         public void Style()
         {
-            throw new NotImplementedException();
+            this.wrappee.Style();
         }
     }
 }

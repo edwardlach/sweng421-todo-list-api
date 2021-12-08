@@ -1,13 +1,13 @@
 ﻿using System;
 namespace to_do.Decorators
 {
-    public class TaskBlockedDecorator : TaskDecorator
+    public class TaskBlockedDecorator : AbstractTaskDecorator
     {
         public TaskBlockedDecorator(TaskComponent wrappee) : base(wrappee) {}
 
         new public void Style()
         {
-            throw new NotImplementedException();
+            base.Style();
         }
     }
 }
