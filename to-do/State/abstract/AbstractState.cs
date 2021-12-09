@@ -39,6 +39,13 @@ namespace to_do.State
             this.notify();
         }
 
+        public void Update(RESOURCE resource)
+        {
+            this.resources.RemoveAll(r => r.Id == resource.Id);
+            this.AddTo(resource);
+            
+        }
+
         public void SetActive(RESOURCE resource)
         {
             this.active = resource;

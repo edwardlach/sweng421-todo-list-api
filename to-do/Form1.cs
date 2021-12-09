@@ -10,15 +10,23 @@ using System.Windows.Forms;
 using to_do.DTOs;
 using to_do.State;
 using to_do.State.@abstract;
+using to_do.Services;
+using to_do.State.Filter.Task;
+
 namespace to_do
 {
     public partial class Form1 : Form
     {
         Store store;
+        IToDoTaskService taskService;
+        ToDoTaskDTO.ToDoTaskSummaryResponse currentSelectedItem;
+        ITaskFilter filter;
 
-        public Form1(Store store)
+        public Form1(Store store, IToDoTaskService taskService)
         {
             this.store = store;
+            this.taskService = taskService;
+            this.filter = new TaskNoFilter();
 
             InitializeComponent();
             listView1.View = View.Details;
@@ -33,25 +41,106 @@ namespace to_do
                 (tasks) =>
                 {
                     this.UpdateList(tasks);
-
                     return tasks;
                 })
                 .Subscribe(this.store.ToDoTaskState, this.store.ToDoTaskState.SelectAll);
+
+
 
         }
 
         private void UpdateList(List<ToDoTaskDTO.ToDoTaskSummaryResponse> tasks)
         {
+            
+            listView1.Items.Clear();
+            tasks = filter.filter(tasks);
+
             //int rowNum = 0;
             tasks.ForEach(task => {
                 string[] row = { task.Title, task.Priority, task.DueDate.ToString(), task.Status };
                 var listViewItem = new ListViewItem(row);
+                listViewItem.Tag = task;
                 listView1.Items.Add(listViewItem);
             });
 
-    
+        }
+        private async void addItemButton_Click(object sender, EventArgs e)
+        {
+            {
+                ToDoTaskDTO.ToDoTaskCreateRequest request = new ToDoTaskDTO.ToDoTaskCreateRequest();
+                request.Title = textBox1.Text;
+                request.Description = textBox1.Text;
+                request.DueDate = dateTimePicker1.Value;
+                request.Priority = comboBox2.Text;
+                request.Status = comboBox3.Text;
+
+                request.ListId = store.ToDoListState.SelectActive().Id;
+                request.UserId = store.UserState.SelectActive().Id;
+
+                //listView1.Items[1].BackColor = Color.Red;
+                //listView1.Items[1].ForeColor = Color.White;
+
+                ToDoTaskDTO.ToDoTaskResponse taskResponse = await taskService.Create(request);
+                ToDoTaskDTO.ToDoTaskSummaryResponse toDoTaskSummaryResponse = new ToDoTaskDTO.ToDoTaskSummaryResponse(taskResponse);
+                this.store.ToDoTaskState.AddTo(toDoTaskSummaryResponse);
+            }
+        }
+        private async void editItemButton_Click(object sender, EventArgs e)
+        {
+
+            ToDoTaskDTO.ToDoTaskUpdateRequest updateRequest = new ToDoTaskDTO.ToDoTaskUpdateRequest();
+
+            updateRequest.Title = textBox1.Text;
+            updateRequest.Description = textBox1.Text;
+            updateRequest.DueDate = dateTimePicker1.Value;
+            updateRequest.Priority = comboBox2.Text;
+            updateRequest.Status = comboBox3.Text;
+            updateRequest.UserId = this.store.UserState.SelectActive().Id;
+
+            ToDoTaskDTO.ToDoTaskResponse taskResponse = await taskService.Update(updateRequest, currentSelectedItem.Id);
+            ToDoTaskDTO.ToDoTaskSummaryResponse toDoTaskSummaryResponse = new ToDoTaskDTO.ToDoTaskSummaryResponse(taskResponse);
+            this.store.ToDoTaskState.Update(toDoTaskSummaryResponse);
 
         }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            currentSelectedItem = (ToDoTaskDTO.ToDoTaskSummaryResponse)listView1.SelectedItems[0].Tag;
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox1.Text)
+            {
+
+                case "Past Due":
+                    filter = new TaskPastDueFilter();
+                    break;
+                case "Due Soon":
+                    filter = new TaskDueSoonFilter();   
+                    break;
+                case "HIGH":
+                case "MEDIUM":
+                case "LOW":
+                    filter = new TaskPriorityFilter(comboBox1.Text);
+                    break;
+                case "BLOCKED":
+                case "IN_PROGRESS":
+                case "COMPLETE":
+                case "ON_DECK":
+                    filter = new TaskStatusFilter(comboBox1.Text);
+                    break;
+                default:
+                    filter = new TaskNoFilter();
+                    break;
+
+            }
+
+            this.UpdateList(this.store.ToDoTaskState.SelectAll());
+        }
+
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -77,38 +166,14 @@ namespace to_do
 
         }
 
-        private void addItemButton_Click(object sender, EventArgs e)
-        {
-            {
 
-
-
-                string[] row = { "Get the Groceries", "High", "Today" };
-                var listViewItem = new ListViewItem(row);
-                listView1.Items.Add(listViewItem);
-
-                string[] row2 = { "Pickup Timmy from Baseball", "Low", "Today" };
-                var listViewItem2 = new ListViewItem(row2);
-                listView1.Items.Add(listViewItem2);
-
-                string[] row3 = { "Put Elf on Shelf", "Medium", "Today" };
-                var listViewItem3 = new ListViewItem(row3);
-                listView1.Items.Add(listViewItem3);
-                listView1.Items[1].BackColor = Color.Red;
-                listView1.Items[1].ForeColor = Color.White;
-
-            }
-        }
 
         private void label2_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -120,12 +185,24 @@ namespace to_do
 
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

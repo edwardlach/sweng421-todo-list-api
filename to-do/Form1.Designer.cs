@@ -35,8 +35,6 @@ namespace to_do
             this.addItemButton = new System.Windows.Forms.Button();
             this.editItemButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.moveItemUp = new System.Windows.Forms.Button();
-            this.moveItemDown = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -47,6 +45,7 @@ namespace to_do
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -102,6 +101,7 @@ namespace to_do
             this.editItemButton.TabIndex = 6;
             this.editItemButton.Text = "Edit Selected Item";
             this.editItemButton.UseVisualStyleBackColor = true;
+            this.editItemButton.Click += new System.EventHandler(this.editItemButton_Click);
             // 
             // listView1
             // 
@@ -113,31 +113,20 @@ namespace to_do
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
-            // moveItemUp
-            // 
-            this.moveItemUp.Location = new System.Drawing.Point(404, 286);
-            this.moveItemUp.Name = "moveItemUp";
-            this.moveItemUp.Size = new System.Drawing.Size(104, 23);
-            this.moveItemUp.TabIndex = 9;
-            this.moveItemUp.Text = "Move Item Up";
-            this.moveItemUp.UseVisualStyleBackColor = true;
-            // 
-            // moveItemDown
-            // 
-            this.moveItemDown.Location = new System.Drawing.Point(404, 333);
-            this.moveItemDown.Name = "moveItemDown";
-            this.moveItemDown.Size = new System.Drawing.Size(104, 23);
-            this.moveItemDown.TabIndex = 10;
-            this.moveItemDown.Text = "Move Item Down";
-            this.moveItemDown.UseVisualStyleBackColor = true;
-            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Priority",
-            "Creation Date",
-            "Due Date"});
+            "None",
+            "Past Due",
+            "Due Soon",
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "BLOCKED",
+            "IN_PROGRESS",
+            "COMPLETE",
+            "ON_DECK"});
             this.comboBox1.Location = new System.Drawing.Point(271, 694);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
@@ -156,7 +145,7 @@ namespace to_do
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(644, 216);
+            this.textBox1.Location = new System.Drawing.Point(490, 204);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(366, 20);
             this.textBox1.TabIndex = 13;
@@ -165,7 +154,7 @@ namespace to_do
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(594, 219);
+            this.label4.Location = new System.Drawing.Point(440, 207);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(34, 13);
             this.label4.TabIndex = 14;
@@ -174,15 +163,16 @@ namespace to_do
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(644, 261);
+            this.dateTimePicker1.Location = new System.Drawing.Point(490, 249);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 15;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(579, 267);
+            this.label5.Location = new System.Drawing.Point(425, 255);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 13);
             this.label5.TabIndex = 16;
@@ -195,15 +185,16 @@ namespace to_do
             "HIGH",
             "MEDIUM",
             "LOW"});
-            this.comboBox2.Location = new System.Drawing.Point(644, 308);
+            this.comboBox2.Location = new System.Drawing.Point(490, 296);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
             this.comboBox2.TabIndex = 18;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(594, 311);
+            this.label6.Location = new System.Drawing.Point(440, 299);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 17;
@@ -217,25 +208,36 @@ namespace to_do
             "IN_PROGRESS",
             "COMPLETE",
             "ON_DECK"});
-            this.comboBox3.Location = new System.Drawing.Point(644, 354);
+            this.comboBox3.Location = new System.Drawing.Point(490, 342);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(121, 21);
             this.comboBox3.TabIndex = 20;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(594, 357);
+            this.label7.Location = new System.Drawing.Point(440, 345);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 13);
             this.label7.TabIndex = 19;
             this.label7.Text = "Status: ";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(652, 639);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 13);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Change Ticker";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 742);
+            this.ClientSize = new System.Drawing.Size(875, 742);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.comboBox2);
@@ -246,8 +248,6 @@ namespace to_do
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.moveItemDown);
-            this.Controls.Add(this.moveItemUp);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.editItemButton);
             this.Controls.Add(this.addItemButton);
@@ -270,8 +270,6 @@ namespace to_do
         private System.Windows.Forms.Button addItemButton;
         private System.Windows.Forms.Button editItemButton;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button moveItemUp;
-        private System.Windows.Forms.Button moveItemDown;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
@@ -282,6 +280,7 @@ namespace to_do
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 

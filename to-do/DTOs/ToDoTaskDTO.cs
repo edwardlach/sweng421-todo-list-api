@@ -38,6 +38,17 @@ namespace to_do.DTOs
 
         public class ToDoTaskSummaryResponse : AbstractTimestampedDTO.AbstractTimestampedResponse
         {
+            public ToDoTaskSummaryResponse() { }
+
+            public ToDoTaskSummaryResponse(ToDoTaskResponse response) { 
+                this.Title = response.Title; 
+                this.Description = response.Description;
+                this.Priority = response.Priority;
+                this.Status = response.Status;
+                this.DueDate = response.DueDate;
+                this.ListId = response.List.Id;
+                this.Id = response.Id;
+            }
             public string Title { get; set; }
 
             public string Description { get; set; }
@@ -49,6 +60,7 @@ namespace to_do.DTOs
             public DateTime DueDate { get; set; }
 
             public int ListId { get; set; }
+                        
         }
 
         public class ToDoTaskCollectionResponse

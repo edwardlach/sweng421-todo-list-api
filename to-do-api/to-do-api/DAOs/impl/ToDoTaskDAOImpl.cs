@@ -16,6 +16,20 @@ namespace to_do_api.DAOs.impl
                 .Where<ToDoTask>(t => t.ListId == listId)
                 .ToList();
         }
+        new public ToDoTask Read(int id)
+        {
+            return this.dbContext.ToDoTasks
+                .Include<ToDoTask>("List")
+                .Where<ToDoTask>(t => t.Id == id)
+                .First<ToDoTask>();
+        }
+
+        new public ToDoTask Update(int id, ToDoTask updates)
+        {
+            base.Update(id, updates);
+            return this.Read(id);
+        }
+
 
         protected override void ApplyUpdates(ToDoTask toUpdate, ToDoTask updates)
         {

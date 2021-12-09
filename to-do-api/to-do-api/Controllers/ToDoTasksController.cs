@@ -31,6 +31,8 @@ namespace to_do_api.Controllers
         }
 
         // PUT tasks/{id}
+        
+        [HttpPut("{id}")]
         public ToDoTaskDTO.ToDoTaskResponse Update(int id, ToDoTaskDTO.ToDoTaskUpdateRequest updates)
         {
             return new ToDoTaskDTO.ToDoTaskResponse(
