@@ -35,7 +35,7 @@ namespace to_do
                 (changes) =>
                 {
                     changes.ForEach(c => Console.WriteLine(
-                        c.Id + ": Task Id " + c.TaskId + " was " + c.Value));
+                        c.Id + ": Task Id " + c.Task + " was " + c.Value));
                     return changes;
                 })
                 .Subscribe(this.store.ChangeState, this.store.ChangeState.SelectAll);

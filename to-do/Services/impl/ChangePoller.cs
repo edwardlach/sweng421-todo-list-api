@@ -5,6 +5,7 @@ using to_do.State.@abstract;
 using System.Threading.Tasks;
 using System.Threading;
 using to_do.DTOs;
+
 namespace to_do.Services.impl
 {
     public class ChangePoller : IChangePoller
@@ -23,19 +24,10 @@ namespace to_do.Services.impl
 
         public void PollForChanges(object state)
         {
+            Console.WriteLine("Polling for changes");
             CancellationToken token = (CancellationToken)state;
             List<SubscriptionDTO.SubscriptionResponse> currrentSubscriptions
-                    = new List<SubscriptionDTO.SubscriptionResponse>();
-
-            new Observer<
-                    SubscriptionDTO.SubscriptionResponse,
-                    List<SubscriptionDTO.SubscriptionResponse>>(
-                (subscriptions) =>
-                {
-                    currrentSubscriptions = subscriptions;
-                    return subscriptions;
-                })
-                .Subscribe(this.store.SubscriptionState, this.store.SubscriptionState.SelectAll);
+                    = this.store.SubscriptionState.SelectAll();
 
             List<ChangeDTO.ChangeResponse> changes = new List<ChangeDTO.ChangeResponse>();
             currrentSubscriptions.ForEach(s =>

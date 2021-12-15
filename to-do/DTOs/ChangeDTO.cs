@@ -7,9 +7,9 @@ namespace to_do.DTOs
     {
         public class ChangeResponse : AbstractTimestampedDTO.AbstractTimestampedResponse
         {
-            public int TaskId { get; set; }
+            public ToDoTaskDTO.ToDoTaskSummaryResponse Task { get; set; }
 
-            public string Field { get; set; }
+            public UserDTO.UserResponse ChangingUser { get; set; }
 
             public string Value { get; set; }
         }

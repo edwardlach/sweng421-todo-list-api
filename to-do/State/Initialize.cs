@@ -10,10 +10,14 @@ namespace to_do.State
 {
     internal class Initialize
     {
+        IUserService userService;
+        ISubscriptionService subscriptionService;
         Store store;
         IToDoListService listService;
-        public Initialize(Store store, IToDoListService listService)
+        public Initialize(Store store, IToDoListService listService, IUserService userService, ISubscriptionService subscriptionService)
         {
+            this.userService = userService;
+            this.subscriptionService = subscriptionService; 
             this.store = store;       
             this.listService = listService;
         }
@@ -21,8 +25,12 @@ namespace to_do.State
         public void Run()
         {
             ToDoListDTO.ToDoListResponse response = this.listService.Read(9).Result;
+            UserDTO.UserResponse userResponse = this.userService.Read(2).Result;
+            SubscriptionDTO.SubscriptionCollectionResponse subscriptionResponse = 
+                this.userService.GetUserSubscriptions(2).Result;
             this.store.ToDoListState.SetActive(response);
-            this.store.UserState.SetActive(response.Creator);
+            this.store.UserState.SetActive(userResponse);
+            this.store.SubscriptionState.Set(subscriptionResponse.Collection);
 
             response.Tasks.Collection.ForEach(t =>
             {

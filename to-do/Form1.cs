@@ -40,7 +40,8 @@ namespace to_do
             listView1.Columns.Add("Due Date");
             listView1.Columns.Add("Status");
             this.UpdateList(this.store.ToDoTaskState.SelectAll());
-            
+            this.UpdateChanges(this.store.ChangeState.SelectAll());
+
             //observer pattern
             new Observer<ToDoTaskDTO.ToDoTaskSummaryResponse, List<ToDoTaskDTO.ToDoTaskSummaryResponse>>(
                 (tasks) =>
@@ -50,16 +51,41 @@ namespace to_do
                 })
                 .Subscribe(this.store.ToDoTaskState, this.store.ToDoTaskState.SelectAll);
 
-
+            //observer pattern
+            new Observer<ChangeDTO.ChangeResponse, List<ChangeDTO.ChangeResponse>>(
+                (changes) =>
+                {
+                    this.UpdateChanges(changes);
+                    return changes;
+                })
+                .Subscribe(this.store.ChangeState, this.store.ChangeState.SelectAll);
 
         }
 
+        private void UpdateChanges(List<ChangeDTO.ChangeResponse> changes)
+        {
+            if (listBox1.InvokeRequired)
+            {
+                changes.ForEach(change =>
+                Console.WriteLine("-----> " + change.ChangingUser.FirstName + " " + change.Value + " Task: " + change.Task.Title));
+            }
+            else
+            {
+                listBox1.Items.Clear();
+                changes.ForEach(change =>
+                {
+                    listBox1.Items.Add(change.ChangingUser.FirstName + " updated task " + change.Task.Title +
+                     " to " + change.Value);
+                });
+            }
+        }
         private void UpdateList(List<ToDoTaskDTO.ToDoTaskSummaryResponse> tasks)
         {
             
             listView1.Items.Clear();
             tasks = filter.filter(tasks);
 
+            
 
             //int rowNum = 0;
            tasks.ForEach(task => {
@@ -94,9 +120,6 @@ namespace to_do
 
                 request.ListId = store.ToDoListState.SelectActive().Id;
                 request.UserId = store.UserState.SelectActive().Id;
-
-                //listView1.Items[1].BackColor = Color.Red;
-                //listView1.Items[1].ForeColor = Color.White;
 
                 ToDoTaskDTO.ToDoTaskResponse taskResponse = await taskService.Create(request);
                 ToDoTaskDTO.ToDoTaskSummaryResponse toDoTaskSummaryResponse = new ToDoTaskDTO.ToDoTaskSummaryResponse(taskResponse);
