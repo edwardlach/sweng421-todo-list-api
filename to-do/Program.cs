@@ -10,6 +10,8 @@ using to_do.Services;
 using to_do.Services.impl;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
+
 
 namespace to_do
 {
@@ -27,7 +29,9 @@ namespace to_do
             ConfigureServices(services);
             using (ServiceProvider serviceProvider = services.BuildServiceProvider())
             {
-                //var changePoller = serviceProvider.GetRequiredService<ChangePoller>();
+
+
+                var changePoller = serviceProvider.GetRequiredService<ChangePoller>();
                 var initialize = serviceProvider.GetRequiredService<Initialize>();
                 initialize.Run();
                 //Task changeListener = changePoller.PollForChanges();
@@ -48,7 +52,7 @@ namespace to_do
                 .AddSingleton<Initialize>()
                 .AddScoped<Component1>()
                 .AddScoped<Form1>()
-                .AddScoped<IChangePoller, ChangePoller>()
+                .AddHostedService<ChangePoller>()
                 .AddScoped<IAssignmentService, AsssignmentService>()
                 .AddScoped<IMembershipService, MembershipService>()
                 .AddScoped<ISubscriptionService, SubscriptionService>()

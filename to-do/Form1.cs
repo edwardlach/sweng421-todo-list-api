@@ -12,6 +12,7 @@ using to_do.State;
 using to_do.State.@abstract;
 using to_do.Services;
 using to_do.State.Filter.Task;
+using to_do.State.Sort.Task;
 
 namespace to_do
 {
@@ -21,6 +22,7 @@ namespace to_do
         IToDoTaskService taskService;
         ToDoTaskDTO.ToDoTaskSummaryResponse currentSelectedItem;
         ITaskFilter filter;
+        public int changeCount = 0;
 
         public Form1(Store store, IToDoTaskService taskService)
         {
@@ -41,6 +43,9 @@ namespace to_do
                 (tasks) =>
                 {
                     this.UpdateList(tasks);
+
+
+
                     return tasks;
                 })
                 .Subscribe(this.store.ToDoTaskState, this.store.ToDoTaskState.SelectAll);
@@ -205,6 +210,35 @@ namespace to_do
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sortByComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (sortByComboBox.Text)
+            {
+
+                case "Task":
+                    filter = new TaskSortTaskAlphabetical();
+                    break;
+                case "Create Date":
+                    filter = new TaskSortCreateDate();
+                    break;
+                case "Due Date":
+                    filter = new TaskSortDueDate(comboBox1.Text);
+                    break;
+                case "Priority":
+                    filter = new TaskSortPriority(comboBox1.Text);
+                    break;
+                default:
+                    filter = new TaskNoSort();
+                    break;
+
+            }
         }
     }
 }
