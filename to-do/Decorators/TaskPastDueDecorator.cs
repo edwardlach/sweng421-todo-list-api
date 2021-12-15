@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
 namespace to_do.Decorators
 {
     public class TaskPastDueDecorator : AbstractTaskDecorator
     {
         public TaskPastDueDecorator(TaskComponent wrappee) : base(wrappee) {}
 
-        new public void Style()
+        public override ListViewItem ToListViewItem()
         {
-            base.Style();
+            ListViewItem item = base.ToListViewItem();
+            item.BackColor = Color.Red;
+            return item;
         }
     }
 }

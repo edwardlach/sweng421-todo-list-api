@@ -30,8 +30,6 @@ namespace to_do
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.sortByComboBox = new System.Windows.Forms.ComboBox();
             this.addItemButton = new System.Windows.Forms.Button();
             this.editItemButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -60,32 +58,6 @@ namespace to_do
             this.label1.TabIndex = 0;
             this.label1.Text = "Distributed Task Manager";
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 1287);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 24);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Sort By:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // sortByComboBox
-            // 
-            this.sortByComboBox.FormattingEnabled = true;
-            this.sortByComboBox.Items.AddRange(new object[] {
-            "Task",
-            "Creation Date",
-            "Due Date",
-            "Priority"});
-            this.sortByComboBox.Location = new System.Drawing.Point(138, 1281);
-            this.sortByComboBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.sortByComboBox.Name = "sortByComboBox";
-            this.sortByComboBox.Size = new System.Drawing.Size(218, 32);
-            this.sortByComboBox.TabIndex = 4;
-            this.sortByComboBox.SelectedIndexChanged += new System.EventHandler(this.sortByComboBox_SelectedIndexChanged);
             // 
             // addItemButton
             // 
@@ -134,7 +106,7 @@ namespace to_do
             "IN_PROGRESS",
             "COMPLETE",
             "ON_DECK"});
-            this.comboBox1.Location = new System.Drawing.Point(497, 1281);
+            this.comboBox1.Location = new System.Drawing.Point(299, 1275);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(218, 32);
@@ -144,7 +116,7 @@ namespace to_do
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(405, 1287);
+            this.label2.Location = new System.Drawing.Point(207, 1281);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 24);
@@ -243,18 +215,19 @@ namespace to_do
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1196, 1219);
+            this.label8.Location = new System.Drawing.Point(807, 1214);
             this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(184, 24);
+            this.label8.Size = new System.Drawing.Size(86, 24);
             this.label8.TabIndex = 21;
-            this.label8.Text = "Update Check Count";
+            this.label8.Text = "Changes";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(1389, 1214);
+            this.textBox2.Location = new System.Drawing.Point(902, 1214);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 29);
+            this.textBox2.Size = new System.Drawing.Size(564, 29);
             this.textBox2.TabIndex = 22;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
@@ -278,8 +251,6 @@ namespace to_do
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.editItemButton);
             this.Controls.Add(this.addItemButton);
-            this.Controls.Add(this.sortByComboBox);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Form1";
@@ -293,8 +264,6 @@ namespace to_do
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox sortByComboBox;
         private System.Windows.Forms.Button addItemButton;
         private System.Windows.Forms.Button editItemButton;
         private System.Windows.Forms.ListView listView1;

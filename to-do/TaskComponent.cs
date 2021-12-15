@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using to_do.DTOs;
 namespace to_do
 {
@@ -14,12 +15,31 @@ namespace to_do
 
         public object Clone()
         {
-            throw new NotImplementedException();
+            TaskComponent taskComponent = new TaskComponent(this.task);
+            
+            return taskComponent; 
         }
 
-        public void Style()
+        public void SetTask(ToDoTaskDTO.ToDoTaskSummaryResponse task)
         {
-            throw new NotImplementedException();
+            this.task = task;
+
         }
+
+        public void Style(ListViewItem listViewItem)
+        {
+            return;
+        }
+
+        public ListViewItem ToListViewItem()
+        {
+            string[] row = { task.Title, task.Priority, task.DueDate.ToString(), task.Status };
+            var listViewItem = new ListViewItem(row);
+            listViewItem.Tag = task;
+
+            return listViewItem; 
+        }
+
+       
     }
 }

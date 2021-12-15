@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Windows.Forms;
+
 namespace to_do
 {
     public interface ITaskComponent
     {
-        void Style();
+        ListViewItem ToListViewItem();
+
+        
     }
 }

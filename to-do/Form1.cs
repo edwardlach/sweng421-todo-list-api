@@ -12,7 +12,7 @@ using to_do.State;
 using to_do.State.@abstract;
 using to_do.Services;
 using to_do.State.Filter.Task;
-using to_do.State.Sort.Task;
+using to_do.Decorators;
 
 namespace to_do
 {
@@ -23,12 +23,15 @@ namespace to_do
         ToDoTaskDTO.ToDoTaskSummaryResponse currentSelectedItem;
         ITaskFilter filter;
         public int changeCount = 0;
+        TaskComponent taskPrototype;
+
 
         public Form1(Store store, IToDoTaskService taskService)
         {
             this.store = store;
             this.taskService = taskService;
             this.filter = new TaskNoFilter();
+            this.taskPrototype = new TaskComponent(new ToDoTaskDTO.ToDoTaskSummaryResponse());
 
             InitializeComponent();
             listView1.View = View.Details;
@@ -43,9 +46,6 @@ namespace to_do
                 (tasks) =>
                 {
                     this.UpdateList(tasks);
-
-
-
                     return tasks;
                 })
                 .Subscribe(this.store.ToDoTaskState, this.store.ToDoTaskState.SelectAll);
@@ -60,13 +60,26 @@ namespace to_do
             listView1.Items.Clear();
             tasks = filter.filter(tasks);
 
+
             //int rowNum = 0;
-            tasks.ForEach(task => {
-                string[] row = { task.Title, task.Priority, task.DueDate.ToString(), task.Status };
-                var listViewItem = new ListViewItem(row);
-                listViewItem.Tag = task;
-                listView1.Items.Add(listViewItem);
+           tasks.ForEach(task => {
+               TaskComponent taskComponent = (TaskComponent)taskPrototype.Clone();
+               taskComponent.SetTask(task);
+               ITaskComponent styled = taskComponent;
+               if (task.Priority.Equals("HIGH"))
+               {
+                   styled = new TaskHighPriorityDecorator(taskComponent);
+               }
+               else if (task.DueDate < DateTime.Now)
+               {
+                   styled = new TaskPastDueDecorator(taskComponent);
+               }
+               
+                listView1.Items.Add(styled.ToListViewItem());
             });
+
+            
+
 
         }
         private async void addItemButton_Click(object sender, EventArgs e)
@@ -219,26 +232,12 @@ namespace to_do
 
         private void sortByComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (sortByComboBox.Text)
-            {
 
-                case "Task":
-                    filter = new TaskSortTaskAlphabetical();
-                    break;
-                case "Create Date":
-                    filter = new TaskSortCreateDate();
-                    break;
-                case "Due Date":
-                    filter = new TaskSortDueDate(comboBox1.Text);
-                    break;
-                case "Priority":
-                    filter = new TaskSortPriority(comboBox1.Text);
-                    break;
-                default:
-                    filter = new TaskNoSort();
-                    break;
+        }
 
-            }
+        private void label8_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

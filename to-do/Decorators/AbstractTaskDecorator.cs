@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows.Forms;
+
 namespace to_do.Decorators
 {
     public abstract class AbstractTaskDecorator : ITaskComponent
@@ -10,9 +12,12 @@ namespace to_do.Decorators
             this.wrappee = wrappee;
         }
 
-        public void Style()
+        public virtual ListViewItem ToListViewItem()
         {
-            this.wrappee.Style();
+
+            return this.wrappee.ToListViewItem();
         }
+        
+        
     }
 }
