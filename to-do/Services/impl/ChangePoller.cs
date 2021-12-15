@@ -5,12 +5,9 @@ using to_do.State.@abstract;
 using System.Threading.Tasks;
 using System.Threading;
 using to_do.DTOs;
-using Microsoft.Extensions.Hosting;
 namespace to_do.Services.impl
-
-    
 {
-    public class ChangePoller : BackgroundService, IChangePoller, IHostedService
+    public class ChangePoller : IChangePoller
     {
         private ISubscriptionService subscriptionService;
         private Store store;
@@ -24,15 +21,22 @@ namespace to_do.Services.impl
             this.subscriptionService = subscriptionService;
         }
 
-
         public void PollForChanges(object state)
         {
-            Console.WriteLine("Poll for changes");
             CancellationToken token = (CancellationToken)state;
             List<SubscriptionDTO.SubscriptionResponse> currrentSubscriptions
-                    = this.store.SubscriptionState.SelectAll();
+                    = new List<SubscriptionDTO.SubscriptionResponse>();
 
-                       
+            new Observer<
+                    SubscriptionDTO.SubscriptionResponse,
+                    List<SubscriptionDTO.SubscriptionResponse>>(
+                (subscriptions) =>
+                {
+                    currrentSubscriptions = subscriptions;
+                    return subscriptions;
+                })
+                .Subscribe(this.store.SubscriptionState, this.store.SubscriptionState.SelectAll);
+
             List<ChangeDTO.ChangeResponse> changes = new List<ChangeDTO.ChangeResponse>();
             currrentSubscriptions.ForEach(s =>
             {
@@ -45,25 +49,18 @@ namespace to_do.Services.impl
                 changes.ForEach(change => this.store.ChangeState.AddTo(change));
             }
 
+            if (token.IsCancellationRequested)
+            {
+                this._timer.Dispose();
+            }
         }
 
-        //public Task StartAsync(CancellationToken cancellationToken)
-        //{
-        //    Console.WriteLine("Start ASYNC called");
-        //    this._timer = new Timer(PollForChanges, cancellationToken, TimeSpan.Zero, TimeSpan.FromSeconds(5));
-        //    return Task.CompletedTask;
-        //}
-
-        //public Task StopAsync(CancellationToken cancellationToken)
-        //{
-        //    return Task.CompletedTask;
-        //}
-
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        public async Task Start(CancellationToken cancellationToken)
         {
-            Console.WriteLine("Start ASYNC called");
-            this._timer = new Timer(PollForChanges, stoppingToken, TimeSpan.Zero, TimeSpan.FromSeconds(5));
-            return Task.CompletedTask;
+            await Task.Run(() =>
+            {
+                this._timer = new Timer(PollForChanges, cancellationToken, TimeSpan.Zero, TimeSpan.FromSeconds(5));
+            });
         }
     }
 }
