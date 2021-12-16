@@ -43,8 +43,6 @@ namespace to_do
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -62,7 +60,7 @@ namespace to_do
             // addItemButton
             // 
             this.addItemButton.Location = new System.Drawing.Point(116, 292);
-            this.addItemButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.addItemButton.Margin = new System.Windows.Forms.Padding(6);
             this.addItemButton.Name = "addItemButton";
             this.addItemButton.Size = new System.Drawing.Size(191, 42);
             this.addItemButton.TabIndex = 5;
@@ -73,7 +71,7 @@ namespace to_do
             // editItemButton
             // 
             this.editItemButton.Location = new System.Drawing.Point(363, 292);
-            this.editItemButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.editItemButton.Margin = new System.Windows.Forms.Padding(6);
             this.editItemButton.Name = "editItemButton";
             this.editItemButton.Size = new System.Drawing.Size(191, 42);
             this.editItemButton.TabIndex = 6;
@@ -85,7 +83,7 @@ namespace to_do
             // 
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(55, 377);
-            this.listView1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.listView1.Margin = new System.Windows.Forms.Padding(6);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(671, 866);
             this.listView1.TabIndex = 8;
@@ -107,7 +105,7 @@ namespace to_do
             "COMPLETE",
             "ON_DECK"});
             this.comboBox1.Location = new System.Drawing.Point(299, 1275);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(218, 32);
             this.comboBox1.TabIndex = 12;
@@ -127,7 +125,7 @@ namespace to_do
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(898, 377);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(6);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(668, 29);
             this.textBox1.TabIndex = 13;
@@ -147,7 +145,7 @@ namespace to_do
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(898, 460);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(6);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(363, 29);
             this.dateTimePicker1.TabIndex = 15;
@@ -171,7 +169,7 @@ namespace to_do
             "MEDIUM",
             "LOW"});
             this.comboBox2.Location = new System.Drawing.Point(898, 546);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(6);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(218, 32);
             this.comboBox2.TabIndex = 18;
@@ -196,7 +194,7 @@ namespace to_do
             "COMPLETE",
             "ON_DECK"});
             this.comboBox3.Location = new System.Drawing.Point(898, 631);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(6);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(218, 32);
             this.comboBox3.TabIndex = 20;
@@ -212,33 +210,11 @@ namespace to_do
             this.label7.TabIndex = 19;
             this.label7.Text = "Status: ";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(905, 708);
-            this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(157, 24);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "Remote Changes";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 24;
-            this.listBox1.Location = new System.Drawing.Point(909, 735);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(525, 508);
-            this.listBox1.TabIndex = 22;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1604, 1370);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.comboBox2);
@@ -253,7 +229,7 @@ namespace to_do
             this.Controls.Add(this.editItemButton);
             this.Controls.Add(this.addItemButton);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -278,8 +254,6 @@ namespace to_do
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
