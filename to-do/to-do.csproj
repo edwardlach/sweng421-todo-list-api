@@ -369,7 +369,6 @@
     <Compile Include="State\abstract\IObservable.cs" />
     <Compile Include="State\abstract\IObserver.cs" />
     <Compile Include="State\abstract\StateAction.cs" />
-    <Compile Include="Component1.cs" />
     <Compile Include="State\abstract\Observer.cs" />
     <Compile Include="Services\APIResource.cs" />
     <None Include="packages.config" />

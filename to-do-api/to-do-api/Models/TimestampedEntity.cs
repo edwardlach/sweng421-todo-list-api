@@ -9,8 +9,8 @@ namespace to_do_api.Models
 
         public void SetDateToNow()
         {
-            this.CreatedDate = DateTime.Now;
-            this.UpdatedDate = DateTime.Now;
+            this.CreatedDate = DateTime.UtcNow;
+            this.UpdatedDate = DateTime.UtcNow;
         }
     }
 }

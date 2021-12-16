@@ -23,7 +23,7 @@ namespace to_do_api.Services.impl
             Subscription subscription = this.Read(id);
             List<Change> changes = this.changeService.GetChangesForListSince(
                 subscription.ListId, subscription.LastAccessed);
-            subscription.LastAccessed = DateTime.Now;
+            subscription.LastAccessed = DateTime.UtcNow;
             this.Update(subscription.Id, subscription);
             return changes;
         }

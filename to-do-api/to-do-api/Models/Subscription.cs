@@ -11,7 +11,7 @@ namespace to_do_api.Models
         {
             this.SetDateToNow();
             this.Deleted = false;
-            this.LastAccessed = DateTime.Now;
+            this.LastAccessed = DateTime.UtcNow;
             this.UserId = userId;
             this.ListId = listId;
         }

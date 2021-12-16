@@ -32,7 +32,7 @@ namespace to_do
                 initialize.Run();
                 var changePoller = serviceProvider.GetRequiredService<ChangePoller>();
                 _ = changePoller.Start(new CancellationToken());
-                var comp1 = serviceProvider.GetRequiredService<Component1>();
+               
                 var form1 = serviceProvider.GetRequiredService<Form1>();
                 Application.Run(form1);
             }
@@ -46,7 +46,6 @@ namespace to_do
                 .AddSingleton<HttpClient>()
                 .AddSingleton<ChangePoller>()
                 .AddSingleton<Initialize>()
-                .AddScoped<Component1>()
                 .AddScoped<Form1>()
                 .AddScoped<IChangePoller, ChangePoller>()
                 .AddScoped<IAssignmentService, AsssignmentService>()

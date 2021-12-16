@@ -16,7 +16,7 @@ namespace to_do_api.DTOs
             {
                 Subscription subscription = new Subscription();
                 ToModelHelper(subscription);
-                subscription.LastAccessed = DateTime.Now;
+                subscription.LastAccessed = DateTime.UtcNow;
                 subscription.ListId = this.ListId;
                 subscription.UserId = this.UserId;
                 return subscription;

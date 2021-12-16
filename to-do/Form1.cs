@@ -64,20 +64,8 @@ namespace to_do
 
         private void UpdateChanges(List<ChangeDTO.ChangeResponse> changes)
         {
-            if (listBox1.InvokeRequired)
-            {
                 changes.ForEach(change =>
                 Console.WriteLine("-----> " + change.ChangingUser.FirstName + " " + change.Value + " Task: " + change.Task.Title));
-            }
-            else
-            {
-                listBox1.Items.Clear();
-                changes.ForEach(change =>
-                {
-                    listBox1.Items.Add(change.ChangingUser.FirstName + " updated task " + change.Task.Title +
-                     " to " + change.Value);
-                });
-            }
         }
         private void UpdateList(List<ToDoTaskDTO.ToDoTaskSummaryResponse> tasks)
         {

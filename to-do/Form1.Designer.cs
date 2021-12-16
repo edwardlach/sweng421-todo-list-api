@@ -214,7 +214,7 @@ namespace to_do
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1604, 1370);
+            this.ClientSize = new System.Drawing.Size(1572, 1370);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.comboBox2);

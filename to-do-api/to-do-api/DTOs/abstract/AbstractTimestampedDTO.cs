@@ -9,8 +9,8 @@ namespace to_do_api.DTOs.@abstract
         {
             protected MODEL ToModelHelper(MODEL entity)
             {
-                entity.CreatedDate = DateTime.Now;
-                entity.UpdatedDate = DateTime.Now;
+                entity.CreatedDate = DateTime.UtcNow;
+                entity.UpdatedDate = DateTime.UtcNow;
                 return entity;
             }
         }
@@ -34,7 +34,7 @@ namespace to_do_api.DTOs.@abstract
             new protected MODEL ToModelHelper(MODEL entity)
             {
                 base.ToModelHelper(entity);
-                entity.UpdatedDate = DateTime.Now;
+                entity.UpdatedDate = DateTime.UtcNow;
                 return entity;
             }
         }
